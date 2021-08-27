@@ -22,7 +22,6 @@ class Canvas(FigureCanvas):
         """
         self.x = np.linspace(-2, 2, 100)
         y = self.x
-        print(y)
         self.ax.plot(self.x, y)
 
         self.ax.set(xlabel='x', ylabel='y',
@@ -33,10 +32,9 @@ class Canvas(FigureCanvas):
         self.x = x
 
     def setY(self, y):
-        self.y = np.fromstring(y, dtype=np.uint8)
+        self.y = eval(y)
 
     def plot(self):
-        self.y = self.x**2
         self.ax.cla()
         self.ax.plot(self.x, self.y)
         self.ax.grid()
@@ -76,7 +74,8 @@ class App(QMainWindow):
 
     def plot(self, plot_field):
         y = plot_field.text()
-        #self.chart.setY(y)
+        y = y.replace('x', 'self.x')
+        self.chart.setY(y)
         self.chart.plot()
 
 def main():
