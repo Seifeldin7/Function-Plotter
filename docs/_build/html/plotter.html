@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>plotter module &#8212; Function Plotter  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-plotter">
+<span id="plotter-module"></span><h1>plotter module<a class="headerlink" href="#module-plotter" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="plotter.App">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">plotter.</span></span><span class="sig-name descname"><span class="pre">App</span></span><a class="headerlink" href="#plotter.App" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></p>
+<p>A class to represent the main application.</p>
+<p>…</p>
+<dl class="simple">
+<dt>layout<span class="classifier">QVBoxLayout</span></dt><dd><p>the main layout of the app</p>
+</dd>
+<dt>title<span class="classifier">str</span></dt><dd><p>title of the app</p>
+</dd>
+<dt>chart<span class="classifier">Canvas</span></dt><dd><p>the canvas object to draw on</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>init_ui():</dt><dd><p>initializes the GUI and displays all widgets</p>
+</dd>
+<dt>plot(plot_field, max_field, min_field):</dt><dd><p>plots the function given by the user on the graph and uses max and min values</p>
+</dd>
+<dt>validate_input(input_val, min_val, max_val):</dt><dd><p>validates user input and returns the appropriate message in case of invalid input</p>
+</dd>
+<dt>display_dialog(message):</dt><dd><p>displays a dialog with an error message to the user</p>
+</dd>
+<dt>validate_by_regex(input_val):</dt><dd><p>Validates user input using a regular expression</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.App.display_dialog">
+<span class="sig-name descname"><span class="pre">display_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.App.display_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a dialog with an error message to the user</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>message (str): message to be displayed to user in case of invalid input</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.App.init_ui">
+<span class="sig-name descname"><span class="pre">init_ui</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plotter.App.init_ui" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the GUI and displays all widgets</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.App.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_field</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.App.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the function given by the user on the graph and uses max and min values</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>plot_field (QLineEdit): The function input field
+max_field (QLineEdit): The max field
+min_field (QLineEdit): The min field</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="plotter.App.staticMetaObject">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#plotter.App.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.App.validate_by_regex">
+<span class="sig-name descname"><span class="pre">validate_by_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.App.validate_by_regex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates user input using a regular expression</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>input_val (str): The input function to be plotted</p>
+</dd>
+<dt>Returns:</dt><dd><p>match (bool): boolean to indicate whether the input matches the regex or not</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.App.validate_input">
+<span class="sig-name descname"><span class="pre">validate_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.App.validate_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates user input and returns the appropriate message in case of invalid input</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>input_val (str): The input function to be plotted
+min_val (str): minimum x value on the plot
+max_val (str): maximum x value on the plot</p>
+</dd>
+<dt>Returns:</dt><dd><p>message (str): message to be displayed to user in case of invalid input</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="plotter.Canvas">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">plotter.</span></span><span class="sig-name descname"><span class="pre">Canvas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.Canvas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.backends.backend_qt5agg.FigureCanvasQTAgg</span></code></p>
+<p>A class to represent the drawing canvas.</p>
+<p>…</p>
+<dl class="simple">
+<dt>ax<span class="classifier">Axis</span></dt><dd><p>axis of the graph</p>
+</dd>
+<dt>x<span class="classifier">numpy array</span></dt><dd><p>array of x values</p>
+</dd>
+<dt>y<span class="classifier">numpy array</span></dt><dd><p>array of y values</p>
+</dd>
+<dt>max_val<span class="classifier">int</span></dt><dd><p>the max value of x on the graph</p>
+</dd>
+<dt>min_val<span class="classifier">int</span></dt><dd><p>the min value of x on the graph</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>set_x(x):</dt><dd><p>sets the x value</p>
+</dd>
+<dt>set_y(y):</dt><dd><p>sets the y value</p>
+</dd>
+<dt>set_min(min_val):</dt><dd><p>sets the min value of x</p>
+</dd>
+<dt>set_max(max_val):</dt><dd><p>sets the max value of x</p>
+</dd>
+<dt>plot():</dt><dd><p>updates the plot and redraws the canvas</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.Canvas.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plotter.Canvas.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the plot and redraws the canvas</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.Canvas.set_max">
+<span class="sig-name descname"><span class="pre">set_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.Canvas.set_max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.Canvas.set_min">
+<span class="sig-name descname"><span class="pre">set_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.Canvas.set_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.Canvas.set_x">
+<span class="sig-name descname"><span class="pre">set_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.Canvas.set_x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="plotter.Canvas.set_y">
+<span class="sig-name descname"><span class="pre">set_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotter.Canvas.set_y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="plotter.Canvas.staticMetaObject">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;PySide2.QtCore.QMetaObject</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#plotter.Canvas.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="plotter.main">
+<span class="sig-prename descclassname"><span class="pre">plotter.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plotter.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Function Plotter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Seif Eldin Mohamed Elrefaai.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/plotter.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

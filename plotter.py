@@ -11,6 +11,37 @@ import re
 
 
 class Canvas(FigureCanvas):
+    """
+       A class to represent the drawing canvas.
+
+       ...
+
+       Attributes
+       ----------
+       ax : Axis
+           axis of the graph
+       x : numpy array
+           array of x values
+       y : numpy array
+           array of y values
+       max_val : int
+           the max value of x on the graph
+       min_val : int
+           the min value of x on the graph
+
+       Methods
+       -------
+       set_x(x):
+           sets the x value
+       set_y(y):
+           sets the y value
+       set_min(min_val):
+           sets the min value of x
+       set_max(max_val):
+           sets the max value of x
+       plot():
+           updates the plot and redraws the canvas
+    """
     def __init__(self, parent):
         self.fig, self.ax = plt.subplots(figsize=(5, 4), dpi=200)
         super().__init__(self.fig)
@@ -37,6 +68,9 @@ class Canvas(FigureCanvas):
         self.max_val = max_val
 
     def plot(self):
+        """
+            Updates the plot and redraws the canvas
+        """
         self.ax.cla()
         self.x = np.linspace(self.min_val, self.max_val, 100)
         self.ax.plot(self.x, eval(self.y))
@@ -47,6 +81,33 @@ class Canvas(FigureCanvas):
 
 
 class App(QMainWindow):
+    """
+       A class to represent the main application.
+
+       ...
+
+       Attributes
+       ----------
+       layout : QVBoxLayout
+           the main layout of the app
+       title : str
+           title of the app
+       chart : Canvas
+           the canvas object to draw on
+
+       Methods
+       -------
+       init_ui():
+           initializes the GUI and displays all widgets
+       plot(plot_field, max_field, min_field):
+           plots the function given by the user on the graph and uses max and min values
+       validate_input(input_val, min_val, max_val):
+           validates user input and returns the appropriate message in case of invalid input
+       display_dialog(message):
+           displays a dialog with an error message to the user
+       validate_by_regex(input_val):
+           Validates user input using a regular expression
+    """
     def __init__(self):
         super(App, self).__init__()
         self.title = "Function Plotter"
@@ -56,6 +117,9 @@ class App(QMainWindow):
         self.init_ui()
 
     def init_ui(self):
+        """
+            Initializes the GUI and displays all widgets
+        """
         self.setLayout(self.layout)
         self.win = QWidget()
         self.win.setFixedHeight(900)
@@ -101,6 +165,14 @@ class App(QMainWindow):
         self.win.show()
 
     def plot(self, plot_field, max_field, min_field):
+        """
+            Plots the function given by the user on the graph and uses max and min values
+
+                    Parameters:
+                            plot_field (QLineEdit): The function input field
+                            max_field (QLineEdit): The max field
+                            min_field (QLineEdit): The min field
+        """
         max_value = max_field.text()
         min_value = min_field.text()
         y = plot_field.text()
@@ -120,6 +192,17 @@ class App(QMainWindow):
             self.display_dialog("Something went wrong.")
 
     def validate_input(self, input_val, min_val, max_val):
+        """
+            Validates user input and returns the appropriate message in case of invalid input
+
+                    Parameters:
+                            input_val (str): The input function to be plotted
+                            min_val (str): minimum x value on the plot
+                            max_val (str): maximum x value on the plot
+
+                    Returns:
+                            message (str): message to be displayed to user in case of invalid input
+        """
         message = None
         if not min_val:
             message = "Min value should not be empty."
@@ -134,6 +217,12 @@ class App(QMainWindow):
         return message
 
     def display_dialog(self, message):
+        """
+            Displays a dialog with an error message to the user
+
+                    Parameters:
+                            message (str): message to be displayed to user in case of invalid input
+        """
         mbox = QMessageBox()
         mbox.setText(message)
         mbox.setStyleSheet("color: black;")
@@ -141,6 +230,15 @@ class App(QMainWindow):
         mbox.exec_()
 
     def validate_by_regex(self, input_val):
+        """
+            Validates user input using a regular expression
+
+                Parameters:
+                        input_val (str): The input function to be plotted
+
+                Returns:
+                        match (bool): boolean to indicate whether the input matches the regex or not
+        """
         regex = re.compile(r'((x|\d+)(\+|-|\*|/|\^)?)+', re.I)
         match = regex.fullmatch(str(input_val).replace(' ', ''))
         return bool(match)
