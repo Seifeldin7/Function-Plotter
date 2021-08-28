@@ -9,6 +9,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
 import re
 
+
 class Canvas(FigureCanvas):
     def __init__(self, parent):
         self.fig, self.ax = plt.subplots(figsize=(5, 4), dpi=200)
@@ -23,24 +24,25 @@ class Canvas(FigureCanvas):
                     title='Function')
         self.ax.grid()
 
-    def setX(self, x):
+    def set_x(self, x):
         self.x = x
 
-    def setY(self, y):
-        self.y = eval(y)
+    def set_y(self, y):
+        self.y = y
 
-    def setMin(self, min_val):
+    def set_min(self, min_val):
         self.min_val = min_val
 
-    def setMax(self, max_val):
+    def set_max(self, max_val):
         self.max_val = max_val
 
     def plot(self):
         self.ax.cla()
         self.x = np.linspace(self.min_val, self.max_val, 100)
-        self.ax.plot(self.x, self.y)
+        self.ax.plot(self.x, eval(self.y))
         self.ax.grid()
         self.draw()
+
 
 class App(QMainWindow):
     def __init__(self):
@@ -59,32 +61,32 @@ class App(QMainWindow):
         grid_layout = QGridLayout()
         h_layout = QHBoxLayout()
         win.setLayout(grid_layout)
-        plot_field = QLineEdit(self)
-        min_field = QLineEdit(self)
-        max_field = QLineEdit(self)
+        self.plot_field = QLineEdit(self)
+        self.min_field = QLineEdit(self)
+        self.max_field = QLineEdit(self)
         min_lbl = QLabel("Min: ", self)
         max_lbl = QLabel("Max: ", self)
-        plot_btn = QPushButton("Plot", self)
+        self.plot_btn = QPushButton("Plot", self)
 
-        min_field.setStyleSheet("background-color: black; color: white;")
-        min_field.setFixedWidth(150)
+        self.min_field.setStyleSheet("background-color: black; color: white;")
+        self.min_field.setFixedWidth(150)
         min_lbl.setStyleSheet("color: white;")
-        max_field.setStyleSheet("background-color: black; color: white;")
-        max_field.setFixedWidth(150)
+        self.max_field.setStyleSheet("background-color: black; color: white;")
+        self.max_field.setFixedWidth(150)
         max_lbl.setStyleSheet("color: white;")
-        plot_field.setStyleSheet("background-color: black; color: white;")
-        plot_btn.setStyleSheet("background-color: rgb(23, 82, 198); color: white; ")
+        self.plot_field.setStyleSheet("background-color: black; color: white;")
+        self.plot_btn.setStyleSheet("background-color: rgb(23, 82, 198); color: white; ")
 
-        plot_btn.clicked.connect(lambda: self.plot(plot_field, max_field, min_field))
+        self.plot_btn.clicked.connect(lambda: self.plot(self.plot_field, self.max_field, self.min_field))
 
-        grid_layout.addWidget(plot_field, 1, 1)
-        grid_layout.addWidget(plot_btn, 1, 2)
+        grid_layout.addWidget(self.plot_field, 1, 1)
+        grid_layout.addWidget(self.plot_btn, 1, 2)
         min_max_widget = QWidget(self)
         min_max_widget.setLayout(h_layout)
         h_layout.addWidget(min_lbl)
-        h_layout.addWidget(min_field)
+        h_layout.addWidget(self.min_field)
         h_layout.addWidget(max_lbl)
-        h_layout.addWidget(max_field)
+        h_layout.addWidget(self.max_field)
         grid_layout.addWidget(min_max_widget, 2, 1)
         grid_layout.addWidget(self.chart, 3, 1)
         win.show()
@@ -100,9 +102,9 @@ class App(QMainWindow):
         max_value = float(max_value)
         min_value = float(min_value)
         y = y.replace('x', 'self.x').replace('^', '**')
-        self.chart.setY(y)
-        self.chart.setMax(max_value)
-        self.chart.setMin(min_value)
+        self.chart.set_y(y)
+        self.chart.set_max(max_value)
+        self.chart.set_min(min_value)
         self.chart.plot()
 
     def validate_input(self, input_val, min_val, max_val):
@@ -130,6 +132,7 @@ class App(QMainWindow):
         regex = re.compile(r'((x|\d+)(\+|-|\*|/|\**)?)+', re.I)
         match = regex.fullmatch(str(input_val).replace(' ', ''))
         return bool(match)
+
 
 def main():
     palette = QPalette()
