@@ -40,6 +40,8 @@ class Canvas(FigureCanvas):
         self.ax.cla()
         self.x = np.linspace(self.min_val, self.max_val, 100)
         self.ax.plot(self.x, eval(self.y))
+        self.ax.set(xlabel='x', ylabel='y',
+                    title='Function')
         self.ax.grid()
         self.draw()
 
@@ -54,42 +56,49 @@ class App(QMainWindow):
         self.init_ui()
 
     def init_ui(self):
-        self.setWindowTitle(self.title)
         self.setLayout(self.layout)
-        win = QWidget()
-        self.layout.addWidget(win)
+        self.win = QWidget()
+        self.win.setFixedHeight(900)
+        self.win.setWindowTitle(self.title)
+        self.layout.addWidget(self.win)
         grid_layout = QGridLayout()
         h_layout = QHBoxLayout()
-        win.setLayout(grid_layout)
+        self.win.setLayout(grid_layout)
         self.plot_field = QLineEdit(self)
         self.min_field = QLineEdit(self)
         self.max_field = QLineEdit(self)
         min_lbl = QLabel("Min: ", self)
         max_lbl = QLabel("Max: ", self)
+        enter_fn_lbl = QLabel("Enter a function to plot:", self)
         self.plot_btn = QPushButton("Plot", self)
 
+        enter_fn_lbl.setStyleSheet("color: white;")
+        enter_fn_lbl.setFont(QFont('Arial', 12))
         self.min_field.setStyleSheet("background-color: black; color: white;")
         self.min_field.setFixedWidth(150)
         min_lbl.setStyleSheet("color: white;")
+        min_lbl.setFont(QFont('Arial', 10))
         self.max_field.setStyleSheet("background-color: black; color: white;")
         self.max_field.setFixedWidth(150)
         max_lbl.setStyleSheet("color: white;")
+        max_lbl.setFont(QFont('Arial', 10))
         self.plot_field.setStyleSheet("background-color: black; color: white;")
         self.plot_btn.setStyleSheet("background-color: rgb(23, 82, 198); color: white; ")
 
         self.plot_btn.clicked.connect(lambda: self.plot(self.plot_field, self.max_field, self.min_field))
 
-        grid_layout.addWidget(self.plot_field, 1, 1)
-        grid_layout.addWidget(self.plot_btn, 1, 2)
+        grid_layout.addWidget(enter_fn_lbl, 1, 1)
+        grid_layout.addWidget(self.plot_field, 2, 1)
+        grid_layout.addWidget(self.plot_btn, 2, 2)
         min_max_widget = QWidget(self)
         min_max_widget.setLayout(h_layout)
         h_layout.addWidget(min_lbl)
         h_layout.addWidget(self.min_field)
         h_layout.addWidget(max_lbl)
         h_layout.addWidget(self.max_field)
-        grid_layout.addWidget(min_max_widget, 2, 1)
-        grid_layout.addWidget(self.chart, 3, 1)
-        win.show()
+        grid_layout.addWidget(min_max_widget, 3, 1)
+        grid_layout.addWidget(self.chart, 4, 1)
+        self.win.show()
 
     def plot(self, plot_field, max_field, min_field):
         max_value = max_field.text()
@@ -99,13 +108,16 @@ class App(QMainWindow):
         if message:
             self.display_dialog(message)
             return
-        max_value = float(max_value)
-        min_value = float(min_value)
-        y = y.replace('x', 'self.x').replace('^', '**')
-        self.chart.set_y(y)
-        self.chart.set_max(max_value)
-        self.chart.set_min(min_value)
-        self.chart.plot()
+        try:
+            max_value = float(max_value)
+            min_value = float(min_value)
+            y = y.replace('x', 'self.x').replace('^', '**')
+            self.chart.set_y(y)
+            self.chart.set_max(max_value)
+            self.chart.set_min(min_value)
+            self.chart.plot()
+        except:
+            self.display_dialog("Something went wrong.")
 
     def validate_input(self, input_val, min_val, max_val):
         message = None
@@ -129,7 +141,7 @@ class App(QMainWindow):
         mbox.exec_()
 
     def validate_by_regex(self, input_val):
-        regex = re.compile(r'((x|\d+)(\+|-|\*|/|\**)?)+', re.I)
+        regex = re.compile(r'((x|\d+)(\+|-|\*|/|\^)?)+', re.I)
         match = regex.fullmatch(str(input_val).replace(' ', ''))
         return bool(match)
 

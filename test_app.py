@@ -42,12 +42,12 @@ def test_validate_regex_wrong_example(app):
 
 
 def test_validate_regex_wrong_example(app):
-    assert app.validate_by_regex('x**3') == True
+    assert app.validate_by_regex('x^3') == True
 
 @pytest.fixture
 def plot_field(qtbot):
     field = QLineEdit()
-    field.setText('x**3')
+    field.setText('x^3')
     qtbot.addWidget(field)
     return field
 
